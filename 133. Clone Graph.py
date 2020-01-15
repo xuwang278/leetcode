@@ -1,6 +1,49 @@
 """
 # Definition for a Node.
 class Node:
+    def __init__(self, val):
+        self.val = val
+        self.neighbors = []
+"""
+class Solution:
+    def cloneGraph(self, node: 'Node') -> 'Node':
+        if not node: 
+            return None
+        
+        dict = {}
+        
+        def dfs(node):
+            if node in dict:
+                return dict[node]
+            
+            copy = Node(node.val)
+            dict[node] = copy
+            for next in node.neighbors:
+                copy.neighbors.append(dfs(next))
+                
+            return copy
+        
+        return dfs(node)
+
+    def cloneGraph(self, node: 'Node') -> 'Node':
+        if not node: 
+            return None
+        
+        dict = {}
+        q = [node]
+        dict[node] = Node(node.val) # deep copy the initial node
+        while q:
+            top = q.pop(0)
+            for next in top.neighbors: # deep copy all the neighbors
+                if next not in dict:
+                    dict[next] = Node(next.val)
+                    q.append(next)
+                dict[top].neighbors.append(dict[next])
+        return dict[node]
+
+"""
+# Definition for a Node.
+class Node:
     def __init__(self, val, neighbors):
         self.val = val
         self.neighbors = neighbors

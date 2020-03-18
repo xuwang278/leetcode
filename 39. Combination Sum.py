@@ -66,4 +66,33 @@ class Solution:
         
         return ans
     
+    # sort version
+    # 2020/03/18
+    def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
+        ans = []
+        l = []
+        
+        candidates.sort()
+        
+        def dfs(start, curSum):
+            if curSum == target:
+                ans.append(l.copy())
+                return
+            
+            # handle in the fpr loop
+            # if curSum > target:
+            #     return
+
+            
+            for i in range(start, len(candidates)):
+                if candidates[i] + curSum > target:
+                    break
+                    
+                l.append(candidates[i])
+                dfs(i, curSum + candidates[i])
+                l.pop()
+        
+        dfs(0, 0)
+        
+        return ans
         

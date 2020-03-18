@@ -38,7 +38,30 @@ class Solution:
         
         dfs(0, 0, [])
         return ans
-
-
+    
+    # new version
+    # 2020/03/18
+    def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
+        ans = []
+        l = []
+        
+        def dfs(s, curSum):
+            if curSum == target:
+                ans.append(l.copy())
+                return
+            
+            if curSum > target:
+                return
+            
+            for i in range(s, len(candidates)):
+                print(i)
+                l.append(candidates[i])
+                dfs(i, curSum + candidates[i])
+                l.pop()
+        
+        dfs(0, 0)
+        
+        
+        return ans
     
         

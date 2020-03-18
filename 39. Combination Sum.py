@@ -50,18 +50,20 @@ class Solution:
                 ans.append(l.copy())
                 return
             
+            # This problem allows each item to be selected mutiple times.
+            # Without this base case, the same item in candidates may be selected too much times
+            # but not meeting the case: curSum == target, resulting in out of max depth error
             if curSum > target:
                 return
             
             for i in range(s, len(candidates)):
-                print(i)
+                # print(i)
                 l.append(candidates[i])
                 dfs(i, curSum + candidates[i])
                 l.pop()
         
         dfs(0, 0)
-        
-        
+       
         return ans
     
         

@@ -45,7 +45,7 @@ class Solution:
         ans = []
         l = []
         
-        def dfs(s, curSum):
+        def dfs(start, curSum):
             if curSum == target:
                 ans.append(l.copy())
                 return
@@ -56,14 +56,14 @@ class Solution:
             if curSum > target:
                 return
             
-            for i in range(s, len(candidates)):
-                # print(i)
+            for i in range(start, len(candidates)):
+                print(i)
                 l.append(candidates[i])
                 dfs(i, curSum + candidates[i])
                 l.pop()
         
         dfs(0, 0)
-       
+        
         return ans
     
         

@@ -95,4 +95,25 @@ class Solution:
         dfs(0, 0)
         
         return ans
+    
+    # call method
+    def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
+        ans = []
+        candidates.sort()
+        self.dfs(candidates, 0, 0, target, [], ans)
+        return ans
+    
+    def dfs(self, candidates, start, curSum, target, l, ans):
+        if curSum == target:
+            ans.append(l.copy())
+            return
+        # if curSum > target:
+        #     return
         
+        for i in range(start, len(candidates)):
+            if curSum + candidates[i] > target:
+                break
+                
+            l.append(candidates[i])
+            self.dfs(candidates, i, curSum + candidates[i], target, l, ans)
+            l.pop()
